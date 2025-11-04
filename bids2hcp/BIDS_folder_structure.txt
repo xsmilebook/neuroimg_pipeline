@@ -1,0 +1,259 @@
+BIDS
+©¸©¤sub-APBN20250607101ZYF
+    ©À©¤ses-01
+    ©¦  ©À©¤anat
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_run-1_T1w.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_run-1_T1w.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_T2w.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_T2w.nii
+    ©¦  ©¦      
+    ©¦  ©À©¤dwi
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-1_dwi.bval
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-1_dwi.bvec
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-1_dwi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-1_dwi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-2_dwi.bval
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-2_dwi.bvec
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-2_dwi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-2_dwi.nii
+    ©¦  ©¦      
+    ©¦  ©À©¤fmap
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_acq-dwi_dir-AP_run-1_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_acq-dwi_dir-AP_run-1_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_acq-dwi_dir-AP_run-2_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_acq-dwi_dir-AP_run-2_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-AP_run-1_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-AP_run-1_acq-REST_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-AP_run-2_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-AP_run-2_acq-REST_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-1_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-1_acq-REST_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-2_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-01_dir-PA_run-2_acq-REST_epi.nii
+    ©¦  ©¦      
+    ©¦  ©¸©¤func
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-1_run-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-2_run-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-3_run-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-4_run-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-01_task-REST_echo-5_run-4_bold.nii
+    ©¦          
+    ©À©¤ses-02
+    ©¦  ©À©¤anat
+    ©¦  ©À©¤dwi
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-1_dwi.bval
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-1_dwi.bvec
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-1_dwi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-1_dwi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-2_dwi.bval
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-2_dwi.bvec
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-2_dwi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-2_dwi.nii
+    ©¦  ©¦      
+    ©¦  ©À©¤fmap
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_acq-dwi_dir-AP_run-1_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_acq-dwi_dir-AP_run-1_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_acq-dwi_dir-AP_run-2_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_acq-dwi_dir-AP_run-2_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-AP_run-1_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-AP_run-1_acq-REST_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-AP_run-2_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-AP_run-2_acq-REST_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-1_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-1_acq-REST_epi.nii
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-2_acq-REST_epi.json
+    ©¦  ©¦      sub-APBN20250607101ZYF_ses-02_dir-PA_run-2_acq-REST_epi.nii
+    ©¦  ©¦      
+    ©¦  ©¸©¤func
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-1_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-1_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-2_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-2_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-3_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-3_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-4_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-1_echo-4_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-1_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-1_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-2_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-2_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-3_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-3_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-4_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-2_echo-4_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-1_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-1_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-2_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-2_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-3_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-3_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-4_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-3_echo-4_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-1_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-1_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-1_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-1_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-2_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-2_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-2_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-2_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-3_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-3_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-3_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-3_sbref.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-4_bold.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-4_bold.nii
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-4_sbref.json
+    ©¦          sub-APBN20250607101ZYF_ses-02_task-REST_run-4_echo-4_sbref.nii
+    ©¦          
+    ©¸©¤ses-03
+        ©À©¤anat
+        ©À©¤dwi
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-1_dwi.bval
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-1_dwi.bvec
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-1_dwi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-1_dwi.nii
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-2_dwi.bval
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-2_dwi.bvec
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-2_dwi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-2_dwi.nii
+        ©¦      
+        ©À©¤fmap
+        ©¦      sub-APBN20250607101ZYF_ses-03_acq-dwi_dir-AP_run-1_epi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_acq-dwi_dir-AP_run-1_epi.nii
+        ©¦      sub-APBN20250607101ZYF_ses-03_acq-dwi_dir-AP_run-2_epi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_acq-dwi_dir-AP_run-2_epi.nii
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-AP_run-1_acq-REST_epi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-AP_run-1_acq-REST_epi.nii
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-AP_run-2_acq-REST_epi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-AP_run-2_acq-REST_epi.nii
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-1_acq-REST_epi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-1_acq-REST_epi.nii
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-2_acq-REST_epi.json
+        ©¦      sub-APBN20250607101ZYF_ses-03_dir-PA_run-2_acq-REST_epi.nii
+        ©¦      
+        ©¸©¤func
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-1_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-1_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-1_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-1_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-2_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-2_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-2_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-2_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-3_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-3_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-3_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-3_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-4_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-4_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-4_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-1_echo-4_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-1_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-1_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-1_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-1_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-2_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-2_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-2_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-2_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-3_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-3_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-3_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-3_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-4_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-4_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-4_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-2_echo-4_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-1_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-1_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-1_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-1_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-2_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-2_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-2_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-2_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-3_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-3_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-3_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-3_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-4_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-4_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-4_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-3_echo-4_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-1_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-1_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-1_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-1_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-2_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-2_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-2_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-2_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-3_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-3_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-3_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-3_sbref.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-4_bold.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-4_bold.nii
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-4_sbref.json
+                sub-APBN20250607101ZYF_ses-03_task-REST_run-4_echo-4_sbref.nii
+                

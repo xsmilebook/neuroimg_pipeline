@@ -1,0 +1,55 @@
+ExampleDataOrganization
+└── MK01
+    ├── anat
+    │   └── unprocessed
+    │       ├── T1w
+    │       │   ├── T1w_1.nii.gz
+    │       │   └── T1w_2.nii.gz
+    │       └── T2w
+    │           ├── T2w_1.nii.gz
+    │           └── T2w_2.nii.gz
+    └── func
+        └── unprocessed
+            ├── field_maps
+            │   ├── AP_S1_R1.nii.gz
+            │   ├── AP_S1_R1.json
+            │   ├── AP_S1_R2.nii.gz
+            │   ├── AP_S1_R2.json
+            │   ├── PA_S1_R1.nii.gz
+            │   ├── PA_S1_R1.json
+            │   ├── PA_S1_R2.nii.gz
+            │   └── PA_S1_R2.json
+            └── rest
+                ├── session_1
+                │   ├── run_1
+                │   │   ├── Rest_S1_R1_E1.json
+                │   │   ├── Rest_S1_R1_E1.nii.gz
+                │   │   ├── Rest_S1_R1_E2.json
+                │   │   ├── Rest_S1_R1_E2.nii.gz
+                │   │   ├── Rest_S1_R1_E3.json
+                │   │   ├── Rest_S1_R1_E3.nii.gz
+                │   │   ├── Rest_S1_R1_E4.json
+                │   │   ├── Rest_S1_R1_E4.nii.gz
+                │   │   ├── Rest_S1_R1_E5.json
+                │   │   ├── Rest_S1_R1_E5.nii.gz
+                │   │   ├── Sbref_S1_R1_E1.nii.gz
+                │   │   ├── Sbref_S1_R1_E2.nii.gz
+                │   │   ├── Sbref_S1_R1_E3.nii.gz
+                │   │   ├── Sbref_S1_R1_E4.nii.gz
+                │   │   └── Sbref_S1_R1_E5.nii.gz
+                │   └── run_2
+                │       ├── Rest_S1_R2_E1.nii.gz
+                │       ├── Rest_S1_R2_E1.json
+                │       ├── Rest_S1_R2_E2.nii.gz
+                │       ├── Rest_S1_R2_E2.json
+                │       ├── Rest_S1_R2_E3.nii.gz
+                │       ├── Rest_S1_R2_E3.json
+                │       ├── Rest_S1_R2_E4.nii.gz
+                │       ├── Rest_S1_R2_E4.json
+                │       ├── Rest_S1_R2_E5.nii.gz
+                │       ├── Rest_S1_R2_E5.json
+                │       ├── Sbref_S1_R2_E1.nii.gz
+                │       ├── Sbref_S1_R2_E2.nii.gz
+                │       ├── Sbref_S1_R2_E3.nii.gz
+                │       ├── Sbref_S1_R2_E4.nii.gz
+                │       └── Sbref_S1_R2_E5.nii.gz
