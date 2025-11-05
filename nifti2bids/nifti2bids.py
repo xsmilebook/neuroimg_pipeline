@@ -4,6 +4,8 @@ import shutil
 import sys
 from pathlib import Path
 
+# command format:
+# python src/nifti2bids/convert_to_bids.py --src-dir "/ibmgpfs/cuizaixu_lab/xuhaoshu/cuilab_folder/BP_QC_folder/raw_data/NIFTI/THU_20240830_EFI_055_ZRL" --src-list "e:\\projects\\neuroimg_pipeline\\src\\nifti2bids\\THU_20240830_EFI_055_ZRL.txt" --out-dir "E:\\BIDS_output\\THU_20240830_EFI_055_ZRL" --subject EFI055ZRL
 
 def parse_args():
     p = argparse.ArgumentParser(
