@@ -144,16 +144,16 @@ def main():
         if ("t2" in b.lower() and "spc" in b.lower() and is_nii_name(b))
     ]
 
-    t1_pick = None
     if t1_candidates:
-        # 优先选择 series 最小的作为 run-1
-        t1_pick = sorted(t1_candidates, key=lambda x: (series_num_from_name(x) or 9999))[0]
-        t1_base = t1_pick.split(".")[0]
-        # 支持 .nii 或 .nii.gz 任意一种
-        t1_pair = find_pair(src_dir, t1_base, ["nii.gz", "nii", "json"])
-        for ext, src in t1_pair.items():
-            dst = out_dir / "anat" / f"sub-{subject}_run-1_T1w.{ext}"
-            copy_or_print(src, dst, args.dry_run)
+        # 复制所有 T1 MPRAGE，按 series 序号排序并生成 run-1, run-2 ...
+        t1_sorted = sorted(t1_candidates, key=lambda x: (series_num_from_name(x) or 9999))
+        for idx, t1_name in enumerate(t1_sorted, start=1):
+            t1_base = t1_name.split(".")[0]
+            # 支持 .nii 或 .nii.gz 任意一种
+            t1_pair = find_pair(src_dir, t1_base, ["nii.gz", "nii", "json"])
+            for ext, src in t1_pair.items():
+                dst = out_dir / "anat" / f"sub-{subject}_run-{idx}_T1w.{ext}"
+                copy_or_print(src, dst, args.dry_run)
 
     if t2_candidates:
         t2_pick = sorted(t2_candidates, key=lambda x: (series_num_from_name(x) or 9999))[0]
