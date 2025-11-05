@@ -15,7 +15,7 @@ set -euo pipefail
 
 # 固定参数：无需命令行输入，按需修改以下变量
 NIFTI_ROOT="/ibmgpfs/cuizaixu_lab/xuhaoshu/cuilab_folder/BP_QC_folder/raw_data/NIFTI"
-BIDS_ROOT="/ibmgpfs/cuizaixu_lab/xuhaoshu/cuilab_folder/BP_QC_folder/BIDS_output"
+BIDS_ROOT="/ibmgpfs/cuizaixu_lab/xuhaoshu/cuilab_folder/BP_QC_folder/EFI_240830/BIDS"
 # Python 转换脚本路径（脚本会自动选择存在的路径）
 PY_SCRIPT_LNX="/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/src/nifti2bids/nifti2bids.py"
 PY_SCRIPT_WIN='e:\\projects\\neuroimg_pipeline\\src\\nifti2bids\\nifti2bids.py'

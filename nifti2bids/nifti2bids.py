@@ -71,6 +71,11 @@ def series_num_from_name(name: str):
         return None
 
 
+def is_nii_name(name: str) -> bool:
+    n = name.lower()
+    return n.endswith(".nii") or n.endswith(".nii.gz")
+
+
 def ensure_dirs(root: Path):
     for d in ["anat", "dwi", "fmap", "func"]:
         (root / d).mkdir(parents=True, exist_ok=True)
@@ -129,15 +134,23 @@ def main():
 
     # 分类与选择逻辑
     # 1) ANAT
-    t1_candidates = [b for b in basenames if "t1_mprage" in b and b.endswith(".nii.gz")]
-    t2_candidates = [b for b in basenames if "t2_spc" in b and b.endswith(".nii.gz")]
+    # 兼容大小写与 .nii/.nii.gz 两种扩展名
+    t1_candidates = [
+        b for b in basenames
+        if ("t1" in b.lower() and "mprage" in b.lower() and is_nii_name(b))
+    ]
+    t2_candidates = [
+        b for b in basenames
+        if ("t2" in b.lower() and "spc" in b.lower() and is_nii_name(b))
+    ]
 
     t1_pick = None
     if t1_candidates:
         # 优先选择 series 最小的作为 run-1
         t1_pick = sorted(t1_candidates, key=lambda x: (series_num_from_name(x) or 9999))[0]
         t1_base = t1_pick.split(".")[0]
-        t1_pair = find_pair(src_dir, t1_base, ["nii.gz", "json"])
+        # 支持 .nii 或 .nii.gz 任意一种
+        t1_pair = find_pair(src_dir, t1_base, ["nii.gz", "nii", "json"])
         for ext, src in t1_pair.items():
             dst = out_dir / "anat" / f"sub-{subject}_run-1_T1w.{ext}"
             copy_or_print(src, dst, args.dry_run)
@@ -145,7 +158,7 @@ def main():
     if t2_candidates:
         t2_pick = sorted(t2_candidates, key=lambda x: (series_num_from_name(x) or 9999))[0]
         t2_base = t2_pick.split(".")[0]
-        t2_pair = find_pair(src_dir, t2_base, ["nii.gz", "json"])
+        t2_pair = find_pair(src_dir, t2_base, ["nii.gz", "nii", "json"])
         for ext, src in t2_pair.items():
             dst = out_dir / "anat" / f"sub-{subject}_T2w.{ext}"
             copy_or_print(src, dst, args.dry_run)
