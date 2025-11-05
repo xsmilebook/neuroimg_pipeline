@@ -2,14 +2,12 @@ clc;clear;
 %% head-motion information of rest-1
 % addpath(genpath('/ibmgpfs/cuizaixu_lab/congjing/toolbox/fileio-master'));
 % addpath(genpath('/ibmgpfs/cuizaixu_lab/congjing/toolbox/jsonlab-master'))
-% fMRIprep_subjDir = dir(['/ibmgpfs/cuizaixu_lab/jiahai/tsinghua/results/fmriprep_rest/sub-*/fmriprep/sub-*']);
-fMRIprep_subjDir = dir(['/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/results/fmriprep_rest/sub-*/fmriprep/sub-*']);
-sesID = '';
-% taskID = 'task-switch';
-taskID = 'task-rest';
-runID = '3';
+fMRIprep_subjDir = dir(['/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/results/fmriprep_switch/sub-*/fmriprep/sub-*']);
+sesID = ''
+taskID = 'task-switch';
+runID = '';
 threshold_meanfd = 0.2;
-threshold_framefd = 0.25;
+threshold_framefd = 0.2;
 frameNum_threshould = 20;
 threshold_framefdmax = 3;
 headmotion_report_rest_1 = f_headmotion_Jenkinson(fMRIprep_subjDir, sesID, taskID, runID, threshold_meanfd, threshold_framefd, frameNum_threshould, threshold_framefdmax);
@@ -20,11 +18,6 @@ function headmotion_report = f_headmotion_Jenkinson(fMRIprep_subjDir, sesID, tas
 %% main function
 headmotion_report = table;
 N = 0;
-%% initialize
-gooddata = false(1, length(fMRIprep_subjDir));
-ifoutlier_maxfd = false(1, length(fMRIprep_subjDir));
-ifoutlier_meanfd = false(1, length(fMRIprep_subjDir));
-ifoutlier_fdframeNum = false(1, length(fMRIprep_subjDir));
 for SN = 1:length(fMRIprep_subjDir)
     if fMRIprep_subjDir(SN).isdir
 
@@ -92,13 +85,12 @@ for SN = 1:length(fMRIprep_subjDir)
     end
 end
 headmotion_report.subject_name{N+1} = 'SUM';
-headmotion_report.good_data{N+1} = sum(gooddata);
+headmotion_report.good_data{N+1} = sum(gooddata) ;
 headmotion_report.if_meanfd_outlier{N+1} = sum(ifoutlier_meanfd);
 headmotion_report.if_fdframeNum_outlier{N+1} = sum(ifoutlier_fdframeNum);
 headmotion_report.if_fdframeNum_max{N+1} = sum(ifoutlier_maxfd);
 %% save the file
-% output_floder = '/ibmgpfs/cuizaixu_lab/jiahai/tsinghua/results_fd';
-output_floder = '/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/results_fd';
-csvfilename = fullfile(output_floder, ['thu_BOLDheadmotion_Jenkinson_all_241116', sesID, '_', taskID, '_', runID, '.csv']);
+output_floder = '/ibmgpfs/cuizaixu_lab/tanlirou1/BP/Tsinghua/Check_EFNY_fd';
+csvfilename = fullfile(output_floder, ['Tsinghua_BOLDheadmotion_Jenkinson_1105', sesID, '_', taskID, '_', runID, '.csv']);
 writetable(headmotion_report, csvfilename);
 end

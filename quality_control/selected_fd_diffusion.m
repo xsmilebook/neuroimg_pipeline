@@ -3,7 +3,7 @@ clc;clear;
 addpath(genpath('/ibmgpfs/cuizaixu_lab/congjing/toolbox/fileio-master'));
 addpath(genpath('/ibmgpfs/cuizaixu_lab/congjing/toolbox/jsonlab-master'))
 % qsiprep_subjDir = dir(['/ibmgpfs/cuizaixu_lab/jiahai/tsinghua/results/qsiprep/sub-*/qsiprep/sub-*']);
-qsiprep_subjDir = dir(['/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/results/qsiprep/sub-*/qsiprep/sub-*']);
+qsiprep_subjDir = dir(['/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/EFI_data/results/qsiprep/sub-*/qsiprep/sub-*']);
 headmotion_report_rest_1 = f_headmotion_power(qsiprep_subjDir);
 
 
@@ -40,8 +40,8 @@ end
 headmotion_report.subject_name{N+1} = 'SUM';
 
 %% save the file
-output_floder = '/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/results_fd';
-mkdir(output_floder);
-csvfilename = fullfile(output_floder, ['thu_Diffusionheadmotion_power_all_241102.csv']);
+output_floder = '/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/EFI/QC_folder';
+% mkdir(output_floder);
+csvfilename = fullfile(output_floder, ['thu_Diffusionheadmotion_THU251105.csv']);
 writetable(headmotion_report, csvfilename);
 end
