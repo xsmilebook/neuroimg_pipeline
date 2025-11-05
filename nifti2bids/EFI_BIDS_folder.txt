@@ -1,0 +1,38 @@
+D:.
+├─anat
+│      sub-EFI20250113056ZQL_run-1_T1w.json
+│      sub-EFI20250113056ZQL_run-1_T1w.nii
+│      sub-EFI20250113056ZQL_T2w.json
+│      sub-EFI20250113056ZQL_T2w.nii
+│
+├─dwi
+│      sub-EFI20250113056ZQL_dir-PA_dwi.bval
+│      sub-EFI20250113056ZQL_dir-PA_dwi.bvec
+│      sub-EFI20250113056ZQL_dir-PA_dwi.json
+│      sub-EFI20250113056ZQL_dir-PA_dwi.nii
+│
+├─fmap
+│      sub-EFI20250113056ZQL_acq-dwi_dir-AP_epi.json
+│      sub-EFI20250113056ZQL_acq-dwi_dir-AP_epi.nii
+│      sub-EFI20250113056ZQL_dir-AP_acq-rest_epi.json
+│      sub-EFI20250113056ZQL_dir-AP_acq-rest_epi.nii
+│      sub-EFI20250113056ZQL_dir-AP_acq-task_epi.json
+│      sub-EFI20250113056ZQL_dir-AP_acq-task_epi.nii
+│      sub-EFI20250113056ZQL_dir-PA_acq-rest_epi.json
+│      sub-EFI20250113056ZQL_dir-PA_acq-rest_epi.nii
+│      sub-EFI20250113056ZQL_dir-PA_acq-task_epi.json
+│      sub-EFI20250113056ZQL_dir-PA_acq-task_epi.nii
+│
+└─func
+        sub-EFI20250113056ZQL_task-fm_bold.json
+        sub-EFI20250113056ZQL_task-fm_bold.nii
+        sub-EFI20250113056ZQL_task-math_bold.json
+        sub-EFI20250113056ZQL_task-math_bold.nii
+        sub-EFI20250113056ZQL_task-natural_bold.json
+        sub-EFI20250113056ZQL_task-natural_bold.nii
+        sub-EFI20250113056ZQL_task-read_bold.json
+        sub-EFI20250113056ZQL_task-read_bold.nii
+        sub-EFI20250113056ZQL_task-rest_run-1_bold.json
+        sub-EFI20250113056ZQL_task-rest_run-1_bold.nii
+        sub-EFI20250113056ZQL_task-rest_run-2_bold.json
+        sub-EFI20250113056ZQL_task-rest_run-2_bold.ni
