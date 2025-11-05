@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Script to convert BIDS format data back to a structure resembling the original HCP format.
+Script to convert BIDS format data back to a structure resembling the original HCP format (Lynch et al, 2020 version).
 This script copies files from the input BIDS directory to a new output directory,
 reorganizing and renaming them according to inferred HCP conventions.
 It does not modify the original BIDS data.
@@ -13,66 +13,61 @@ import re
 import argparse
 
 def load_json(filepath):
-    """Loads a JSON file."""
     with open(filepath, 'r') as f:
         return json.load(f)
 
-def get_phase_encoding_info(json_data, filename):
-    """
-    Extracts phase encoding direction from BIDS JSON metadata.
-    Maps BIDS 'i', 'i-', 'j', 'j-' to HCP-like 'LR', 'RL', 'AP', 'PA'.
-    Falls back to inferring from filename if not found in JSON.
-    """
-    pe_dir_bids = json_data.get("PhaseEncodingDirection")
-    if pe_dir_bids:
-        # Standard BIDS mapping to HCP-like acquisition directions
-        pe_map = {
-            'i': 'LR', 'i-': 'RL',
-            'j': 'AP', 'j-': 'PA'
-        }
-        return pe_map.get(pe_dir_bids.upper(), pe_dir_bids)
-    else:
-        # Fallback: Infer from filename if JSON is missing or lacks PE info
-        # Common in BIDS where direction is part of the name (e.g., _dir-AP_)
-        match = re.search(r'_dir-([A-Z]{2})', filename)
-        if match:
-            return match.group(1)
-        # Or infer from _acq- if present
-        match = re.search(r'_acq-([A-Z]{2})', filename)
-        if match:
-            return match.group(1)
-        # Or infer from _run- if it contains direction info (less common but possible)
-        # match = re.search(r'_run-([A-Z]{2})', filename) # Uncomment if needed
-        # if match:
-        #     return match.group(1)
+def get_phase_encoding_info(filename):
+    match = re.search(r'_dir-(AP|PA)', filename, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
     return "UNKNOWN"
 
 def get_bids_info_from_filename(filename):
     """
-    Extracts information from a BIDS filename.
-    Returns a dictionary with keys like 'sub', 'ses', 'task', 'acq', 'dir', 'run', 'echo', 'modality', 'suffix', 'extension'.
+    Robustly parse a BIDS-style filename with flexible key order.
+    Returns dict with keys: 'sub', 'ses', 'task', 'acq', 'dir', 'run', 'echo', 'modality', 'suffix', 'extension'.
+    Accepts any ordering of optional components (task/acq/dir/run/echo/mod).
     """
-    # Regex to match BIDS filename components
-    # Example: sub-APBN20250607101ZYF_ses-01_task-REST_run-1_echo-1_bold.nii
-    pattern = r"sub-(?P<sub>[^_]+)_ses-(?P<ses>[^_]+)(?:_task-(?P<task>[^_]+))?(?:_acq-(?P<acq>[^_]+))?(?:_dir-(?P<dir>[^_]+))?(?:_run-(?P<run>[^_]+))?(?:_echo-(?P<echo>[^_]+))?(?:_mod-(?P<mod>[^_]+))?(?P<suffix>_T1w|_T2w|_dwi|_epi|_bold|_sbref|_phase|_magnitude)(?P<extension>\.[^\.]+(?:\.[^\.]+)?)$"
-    match = re.search(pattern, os.path.basename(filename))
-    if not match:
+    base = os.path.basename(filename)
+    info = {
+        'sub': None, 'ses': None, 'task': None, 'acq': None, 'dir': None,
+        'run': None, 'echo': None, 'mod': None, 'suffix': None, 'extension': None,
+        'modality': None,
+    }
+
+    # Mandatory subject/session
+    m_sub = re.search(r"^sub-([^_]+)", base)
+    m_ses = re.search(r"_ses-([^_]+)", base)
+    if not (m_sub and m_ses):
         return None
-    
-    info = match.groupdict()
-    # Determine modality based on suffix if not explicitly stated
-    if not info.get('modality') and info.get('suffix'):
-        suffix_to_mod = {
-            '_bold': 'bold',
-            '_dwi': 'dwi',
-            '_epi': 'epi', # Could be fmap or dwi sbref
-            '_sbref': 'sbref',
-            '_T1w': 'T1w',
-            '_T2w': 'T2w',
-            '_phase': 'phase',
-            '_magnitude': 'magnitude'
-        }
-        info['modality'] = suffix_to_mod.get(info['suffix'], info['suffix'][1:]) # Remove leading underscore
+    info['sub'] = m_sub.group(1)
+    info['ses'] = m_ses.group(1)
+
+    # Optional keys in any order
+    for key in ['task', 'acq', 'dir', 'run', 'echo', 'mod']:
+        m = re.search(rf"_{key}-([^_]+)", base)
+        if m:
+            info[key] = m.group(1)
+
+    # Suffix and extension at the end
+    m_suf = re.search(r"(_T1w|_T2w|_dwi|_epi|_bold|_sbref|_phase|_magnitude)(\.[^\.]+(?:\.[^\.]+)?)$", base)
+    if not m_suf:
+        return None
+    info['suffix'] = m_suf.group(1)
+    info['extension'] = m_suf.group(2)
+
+    # Modality from suffix when not explicitly provided
+    suffix_to_mod = {
+        '_bold': 'bold',
+        '_dwi': 'dwi',
+        '_epi': 'epi',
+        '_sbref': 'sbref',
+        '_T1w': 'T1w',
+        '_T2w': 'T2w',
+        '_phase': 'phase',
+        '_magnitude': 'magnitude'
+    }
+    info['modality'] = suffix_to_mod.get(info['suffix'], info['suffix'][1:])
     return info
 
 def determine_hcp_modality_and_task(bids_info, bids_json_data):
@@ -185,10 +180,10 @@ def bids_to_hcp(input_bids_dir, output_hcp_dir):
                             pass
                 
                 hcp_modality, hcp_task_or_mod = determine_hcp_modality_and_task(bids_info, json_data)
-                pe_dir = get_phase_encoding_info(json_data, file)
+                pe_dir = get_phase_encoding_info(file)
 
                 # Construct HCP-like output path
-                # HCP typically has: /sub01/unprocessed/3T/[MODALITY]/[SCAN_NAME]/
+                # HCP(Lynch et al, 2020 version) typically has: /sub01/[MODALITY]/unprocessed/[SCAN_NAME]/
                 # Guessing scan name based on task/modality and direction
                 if hcp_modality == 'func':
                     # For func, the scan name often includes the task and direction
@@ -381,18 +376,11 @@ def bids_to_hcp_example(input_bids_dir, output_hcp_dir):
             if modality == 'epi':
                 dest_dir = os.path.join(subj_out_dir, 'func', 'unprocessed', 'field_maps')
                 os.makedirs(dest_dir, exist_ok=True)
-                dir_tag = (direction or '').upper()
+                # Only rely on filename-based direction; no JSON reading.
+                dir_tag = (direction or get_phase_encoding_info(file)).upper()
                 if dir_tag not in ['AP', 'PA']:
-                    json_data = {}
-                    json_src = src_path.replace('.nii.gz', '.json').replace('.nii', '.json')
-                    if os.path.exists(json_src):
-                        try:
-                            json_data = load_json(json_src)
-                        except json.JSONDecodeError:
-                            pass
-                    dir_tag = get_phase_encoding_info(json_data, file).upper()
-                    if dir_tag == 'UNKNOWN':
-                        dir_tag = 'AP'
+                    print(f"Warning: Field map direction not AP/PA in {file}; skipping.")
+                    continue
                 base = f"{dir_tag}_S{ses_num}_R{run}"
                 if ext == '.json':
                     dest_json = os.path.join(dest_dir, f"{base}.json")
