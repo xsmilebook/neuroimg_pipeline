@@ -4,6 +4,12 @@ Script to convert BIDS format data back to a structure resembling the original H
 This script copies files from the input BIDS directory to a new output directory,
 reorganizing and renaming them according to inferred HCP conventions.
 It does not modify the original BIDS data.
+
+command format:
+python bids2hcp.py <bids_dir> <hcp_dir>
+
+command example:
+python bids2hcp.py "E:\projects\neuroimg_pipeline\datasets\ADHD_densesampling\BIDS\sub-APBN20250607101ZYF" "E:\projects\neuroimg_pipeline\datasets\ADHD_densesampling\HCP"
 """
 
 import os
