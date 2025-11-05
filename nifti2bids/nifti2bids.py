@@ -59,9 +59,7 @@ def read_src_list(src_list_path: Path):
 
 
 def series_num_from_name(name: str):
-    base = name
-    if "." in base:
-        base = base.split(".")[0]
+    base = stem_without_ext(name)
     parts = base.split("_")
     if not parts:
         return None
@@ -74,6 +72,18 @@ def series_num_from_name(name: str):
 def is_nii_name(name: str) -> bool:
     n = name.lower()
     return n.endswith(".nii") or n.endswith(".nii.gz")
+
+
+def stem_without_ext(name: str) -> str:
+    """Remove known file extensions without breaking names containing dots (e.g. 0.8mmiso).
+
+    Handles .nii.gz, .nii, .json, .bval, .bvec. If none match, returns the name unchanged.
+    """
+    lower = name.lower()
+    for ext in (".nii.gz", ".nii", ".json", ".bval", ".bvec"):
+        if lower.endswith(ext):
+            return name[: -len(ext)]
+    return name
 
 
 def ensure_dirs(root: Path):
@@ -148,16 +158,18 @@ def main():
         # 复制所有 T1 MPRAGE，按 series 序号排序并生成 run-1, run-2 ...
         t1_sorted = sorted(t1_candidates, key=lambda x: (series_num_from_name(x) or 9999))
         for idx, t1_name in enumerate(t1_sorted, start=1):
-            t1_base = t1_name.split(".")[0]
+            t1_base = stem_without_ext(t1_name)
             # 支持 .nii 或 .nii.gz 任意一种
             t1_pair = find_pair(src_dir, t1_base, ["nii.gz", "nii", "json"])
+            if not t1_pair:
+                print(f"WARN: 未找到 T1 配对文件: base={t1_base} 于 {src_dir}，期望扩展 ['nii.gz','nii','json']")
             for ext, src in t1_pair.items():
                 dst = out_dir / "anat" / f"sub-{subject}_run-{idx}_T1w.{ext}"
                 copy_or_print(src, dst, args.dry_run)
 
     if t2_candidates:
         t2_pick = sorted(t2_candidates, key=lambda x: (series_num_from_name(x) or 9999))[0]
-        t2_base = t2_pick.split(".")[0]
+        t2_base = stem_without_ext(t2_pick)
         t2_pair = find_pair(src_dir, t2_base, ["nii.gz", "nii", "json"])
         for ext, src in t2_pair.items():
             dst = out_dir / "anat" / f"sub-{subject}_T2w.{ext}"
@@ -170,7 +182,7 @@ def main():
         s = series_num_from_name(b)
         if s is not None:
             dwi_pa_series.setdefault(s, {})
-            base = b.split(".")[0]
+            base = stem_without_ext(b)
             dwi_pa_series[s]["nii.gz"] = src_dir / b
             # 匹配同 series 的 bval/bvec/json
             for ext in ["bval", "bvec", "json"]:
@@ -200,7 +212,7 @@ def main():
     dwi_b0_ap_nii = [b for b in basenames if ("sms4_diff_CMR130_B0_AP" in b and b.endswith(".nii.gz"))]
     if dwi_b0_ap_nii:
         b = sorted(dwi_b0_ap_nii, key=lambda x: (series_num_from_name(x) or 0))[-1]
-        base = b.split(".")[0]
+        base = stem_without_ext(b)
         pair = find_pair(src_dir, base, ["nii.gz", "json"])
         for ext, src in pair.items():
             dst = out_dir / "fmap" / f"sub-{subject}_acq-dwi_dir-AP_epi.{ext}"
@@ -213,7 +225,7 @@ def main():
         if not cand:
             return None
         b = sorted(cand, key=lambda x: (series_num_from_name(x) or 0))[-1]
-        base = b.split(".")[0]
+        base = stem_without_ext(b)
         return find_pair(src_dir, base, ["nii.gz", "json"])
 
     # REST AP/PA
@@ -256,14 +268,14 @@ def main():
     rest2 = [b for b in basenames if ("sms4_bold_rest2" in b and b.endswith(".nii.gz"))]
     if rest1:
         b = sorted(rest1, key=lambda x: (series_num_from_name(x) or 0))[0]
-        base = b.split(".")[0]
+        base = stem_without_ext(b)
         pair = find_pair(src_dir, base, ["nii.gz", "json"])
         for ext, src in pair.items():
             dst = out_dir / "func" / f"sub-{subject}_task-rest_run-1_bold.{ext}"
             copy_or_print(src, dst, args.dry_run)
     if rest2:
         b = sorted(rest2, key=lambda x: (series_num_from_name(x) or 0))[0]
-        base = b.split(".")[0]
+        base = stem_without_ext(b)
         pair = find_pair(src_dir, base, ["nii.gz", "json"])
         for ext, src in pair.items():
             dst = out_dir / "func" / f"sub-{subject}_task-rest_run-2_bold.{ext}"
@@ -276,7 +288,7 @@ def main():
             continue
         bolds_sorted = sorted(bolds, key=lambda x: (series_num_from_name(x) or 0))
         for idx, b in enumerate(bolds_sorted, start=1):
-            base = b.split(".")[0]
+            base = stem_without_ext(b)
             pair = find_pair(src_dir, base, ["nii.gz", "json"])
             run_suffix = f"_run-{idx}" if len(bolds_sorted) > 1 else ""
             for ext, src in pair.items():
