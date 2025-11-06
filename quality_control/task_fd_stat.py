@@ -168,9 +168,9 @@ def main():
 
     # 处理不同任务的路径
     task_paths = {
-        'task-switch': '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/results/fmriprep_switch/sub-*/fmriprep/sub-*',
-        'task-sst': '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/results/fmriprep_sst/sub-*/fmriprep/sub-*',
-        'task-nback': '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/results/fmriprep_nback/sub-*/fmriprep/sub-*'
+        'task-switch': '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/EFI_data/results/fmriprep_switch/sub-*/fmriprep/sub-*',
+        'task-sst': '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/EFI_data/results/fmriprep_sst/sub-*/fmriprep/sub-*',
+        'task-nback': '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/EFI_data/results/fmriprep_nback/sub-*/fmriprep/sub-*'
     }
 
     for taskID, path_pattern in task_paths.items():
