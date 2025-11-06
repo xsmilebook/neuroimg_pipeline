@@ -3,20 +3,18 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --ntasks-per-node=8
-#SBATCH --mem-per-cpu 20gb
-#SBATCH -p q_fat_c
-#SBATCH -q high_c
+#SBATCH -p q_fat
 
 
 module load singularity/3.7.0
 #!/bin/bash
 #User inputs:
-BidsDir=/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/BIDS
-wd=/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/wd
-output=/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/results
-fs_license=/ibmgpfs/cuizaixu_lab/xuhaoshu/freesurfer_license
+BidsDir=/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/BIDS
+wd=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/wd/sst
+output=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/results
+fs_license=/ibmgpfs/cuizaixu_lab/xuhaoshu/packages/freesurfer_license
 templateflow=/ibmgpfs/cuizaixu_lab/xuhaoshu/packages/templateflow
-fs_dir=/ibmgpfs/cuizaixu_lab/xuhaoshu/QC_folder/freesurfer
+fs_dir=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/freesurfer
 subj=$1
 nthreads=40
 #Run fmriprep
