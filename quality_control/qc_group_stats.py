@@ -39,9 +39,10 @@ def assign_group_flags(disorder_str):
 
     is_adhd = "ADHD" in s
     is_md = "MD" in s
-    is_dd = "DD" in s
+    # DD 仅在出现 DD 且不出现 MD 时归为 DD 组
+    is_dd = ("DD" in s) and ("MD" not in s)
     # TD group: explicitly TD or empty
-    is_td = (s == "TD") or (s == "")
+    is_td = ("TD" in s) or (s == "")
     is_non_adhd = not is_adhd
 
     return {
@@ -64,7 +65,10 @@ def compute_modality_pass_flags(row, expected_lengths, fd_threshold=0.2):
     fmap_pass = fmap_dir_yes
 
     # 任务/静息：FD 有值才进入统计；通过需长度匹配且 FD<=阈值
-    def pass_with_fd(fd_val, len_val, expected_len):
+    def pass_with_len_fd(fd_val, len_val, expected_len):
+        # 总计以“长度列存在”为准；通过需长度匹配且 FD 有值且不超过阈值
+        if len_val is None:
+            return False
         if fd_val is None:
             return False
         len_ok = (len_val == expected_len)
@@ -73,23 +77,23 @@ def compute_modality_pass_flags(row, expected_lengths, fd_threshold=0.2):
 
     rest1_len = normalize_int(row.get("rest1"))
     rest1_fd = normalize_float(row.get("rest1_fd"))
-    rest1_pass = pass_with_fd(rest1_fd, rest1_len, expected_lengths["rest1"])
+    rest1_pass = pass_with_len_fd(rest1_fd, rest1_len, expected_lengths["rest1"])
 
     rest2_len = normalize_int(row.get("rest2"))
     rest2_fd = normalize_float(row.get("rest2_fd"))
-    rest2_pass = pass_with_fd(rest2_fd, rest2_len, expected_lengths["rest2"])
+    rest2_pass = pass_with_len_fd(rest2_fd, rest2_len, expected_lengths["rest2"])
 
     sst_len = normalize_int(row.get("sst"))
     sst_fd = normalize_float(row.get("sst_fd"))
-    sst_pass = pass_with_fd(sst_fd, sst_len, expected_lengths["sst"])
+    sst_pass = pass_with_len_fd(sst_fd, sst_len, expected_lengths["sst"])
 
     nback_len = normalize_int(row.get("nback"))
     nback_fd = normalize_float(row.get("nback_fd"))
-    nback_pass = pass_with_fd(nback_fd, nback_len, expected_lengths["nback"])
+    nback_pass = pass_with_len_fd(nback_fd, nback_len, expected_lengths["nback"])
 
     switch_len = normalize_int(row.get("switch"))
     switch_fd = normalize_float(row.get("switch_fd"))
-    switch_pass = pass_with_fd(switch_fd, switch_len, expected_lengths["switch"])
+    switch_pass = pass_with_len_fd(switch_fd, switch_len, expected_lengths["switch"])
 
     return {
         "anat_pass": anat_pass,
@@ -99,12 +103,12 @@ def compute_modality_pass_flags(row, expected_lengths, fd_threshold=0.2):
         "sst_pass": sst_pass,
         "nback_pass": nback_pass,
         "switch_pass": switch_pass,
-        # 供“是否纳入统计”使用（仅任务/静息有该判定）
-        "rest1_fd_present": rest1_fd is not None,
-        "rest2_fd_present": rest2_fd is not None,
-        "sst_fd_present": sst_fd is not None,
-        "nback_fd_present": nback_fd is not None,
-        "switch_fd_present": switch_fd is not None,
+        # 供“是否纳入统计”使用：总计以长度列存在为准
+        "rest1_len_present": rest1_len is not None,
+        "rest2_len_present": rest2_len is not None,
+        "sst_len_present": sst_len is not None,
+        "nback_len_present": nback_len is not None,
+        "switch_len_present": switch_len is not None,
     }
 
 
@@ -119,10 +123,11 @@ def summarize_modality(df, group_name, group_mask, modality, expected_lengths, f
         total = passes
         fails = 0
     else:
-        # rest1/rest2/sst/nback/switch：总计包含 FD 有值的个体，失败为（总计-通过）
-        fd_present_col = f"{modality}_fd_present"
+        # rest1/rest2/sst/nback/switch：总计包含“长度列有值”的个体；
+        # 通过：长度==期望且 FD 有值且 FD<=阈值；其余（长度存在但不满足）均为失败
+        len_present_col = f"{modality}_len_present"
         pass_col = f"{modality}_pass"
-        considered = df.loc[group_mask & (df[fd_present_col] == True)]
+        considered = df.loc[group_mask & (df[len_present_col] == True)]
         total = int(considered.shape[0])
         passes = int(considered[pass_col].sum())
         fails = total - passes
@@ -137,7 +142,7 @@ def summarize_modality(df, group_name, group_mask, modality, expected_lengths, f
 
 
 def main():
-    parser = argparse.ArgumentParser(description="按组统计各模态 QC 通过/失败/合计数量（anat/fmap 仅统计 yes；rest/task 以FD存在且阈值为准）")
+    parser = argparse.ArgumentParser(description="按组统计各模态 QC 通过/失败/合计数量（anat/fmap 仅统计 yes；rest/task 以长度列存在计总数，长度匹配且FD≤阈值为通过）")
     parser.add_argument(
         "--input",
         default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\EFI\\QC_folder\\EFI_QC_merged.csv",
@@ -215,7 +220,7 @@ def main():
     out_df.to_csv(args.output, index=False)
 
     # Also print a readable summary
-    print("QC分组统计（anat/fmap 仅统计 yes；rest/task 以FD存在并满足时长+阈值为通过）：")
+    print("QC分组统计（anat/fmap 仅统计 yes；rest/task 以长度列存在计总数，长度匹配且FD≤阈值为通过）：")
     for modality in modalities:
         print(f"\n[{modality}]")
         for group in groups + ["ALL"]:
