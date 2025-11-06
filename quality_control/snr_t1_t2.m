@@ -6,7 +6,7 @@ close all;
 addpath(genpath('/ibmgpfs/cuizaixu_lab/congjing/toolbox/fileio-master'));
 addpath(genpath('/ibmgpfs/cuizaixu_lab/congjing/toolbox/jsonlab-master'))
 
-subjDir = dir(['/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/QC/sub-*/sub-*']);
+subjDir = dir(['/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/EFI_data/QC/sub-*/sub-*']);
 
 anat_report = table;
 N = 0;
@@ -48,6 +48,6 @@ for SN = 1:length(subjDir)
 end
 
 %% Save the file
-output_folder = '/ibmgpfs/cuizaixu_lab/tanlirou1/BP/Tsinghua/Check_EFNY_fd';
-csvfilename = fullfile(output_folder, 'Tsinghua_anat_snr_1029.csv');
+output_folder = '/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/EFI/QC_folder';
+csvfilename = fullfile(output_folder, 'CAS_anat_snr_all_251105.csv');
 writetable(anat_report, csvfilename);
