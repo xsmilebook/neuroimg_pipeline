@@ -3,6 +3,41 @@ import os
 import sys
 import pandas as pd
 
+def _parse_sheet_arg(sheet_arg):
+    """解析 --sheet 参数，支持工作表名称或索引。
+    返回值可为 int（索引，从 0 开始）或 str（名称）；None 或空字符串时默认第一个工作表。
+    """
+    if sheet_arg is None:
+        return 0
+    if isinstance(sheet_arg, int):
+        return sheet_arg
+    try:
+        s = str(sheet_arg).strip()
+        if s == "":
+            return 0
+        if s.isdigit():
+            return int(s)
+        return s
+    except Exception:
+        return 0
+
+def read_table(input_path, sheet_arg=None):
+    ext = os.path.splitext(input_path)[1].lower()
+    if ext in [".xlsx", ".xls"]:
+        sheet = _parse_sheet_arg(sheet_arg)
+        try:
+            df = pd.read_excel(input_path, sheet_name=sheet)
+        except Exception as e:
+            print(f"读取 Excel 失败: {e}")
+            sys.exit(1)
+        return df, ext
+    else:
+        try:
+            df = pd.read_csv(input_path)
+        except Exception as e:
+            print(f"读取 CSV 失败: {e}")
+            sys.exit(1)
+        return df, ext
 
 def normalize_yes(val):
     if pd.isna(val):
@@ -132,29 +167,27 @@ def compute_modality_pass_flags(row, expected_lengths, fd_threshold=0.2, dwi_fd_
 
 
 def summarize_modality(df, group_name, group_mask, modality, expected_lengths, fd_threshold=0.2):
-    # anat/fmap：总计只包括 yes，失败为 0
+    # 新规则：总数包含该组内的所有个体；NA/空视为失败。
+    group_size = int(df.loc[group_mask].shape[0])
     if modality == "anat":
         passes = int((df.loc[group_mask, "anat_pass"]).sum())
-        total = passes
-        fails = 0
+        total = group_size
+        fails = total - passes
     elif modality == "fmap":
         passes = int((df.loc[group_mask, "fmap_pass"]).sum())
-        total = passes
-        fails = 0
+        total = group_size
+        fails = total - passes
     else:
-        # rest1/rest2/sst/nback/switch：总计仅包含“FD 有值”的个体；
-        # 通过：长度==期望且 FD<=阈值；失败：有 FD 但未通过
+        # rest1/rest2/sst/nback/switch：通过为“长度匹配且 FD<=阈值”；
+        # DWI：通过为“FD<=阈值”；缺失值（NA/空）均记为失败并计入总数。
         if modality == "dwi":
-            considered = df.loc[group_mask & (df["dwi_fd_present"] == True)]
-            total = int(considered.shape[0])
-            passes = int(considered["dwi_pass"].sum())
+            passes = int(df.loc[group_mask, "dwi_pass"].sum())
+            total = group_size
             fails = total - passes
         else:
-            fd_present_col = f"{modality}_fd_present"
             pass_col = f"{modality}_pass"
-            considered = df.loc[group_mask & (df[fd_present_col] == True)]
-            total = int(considered.shape[0])
-            passes = int(considered[pass_col].sum())
+            passes = int(df.loc[group_mask, pass_col].sum())
+            total = group_size
             fails = total - passes
 
     return {
@@ -167,11 +200,16 @@ def summarize_modality(df, group_name, group_mask, modality, expected_lengths, f
 
 
 def main():
-    parser = argparse.ArgumentParser(description="按组统计各模态 QC 通过/失败/合计数量（anat/fmap 仅统计 yes；rest/task 以 FD 存在计总数，长度匹配且FD≤阈值为通过；dwi 以 FD 存在计总数，FD≤阈值通过）")
+    parser = argparse.ArgumentParser(description="按组统计各模态 QC 通过/失败/合计数量（总数包含所有个体；NA/空视为失败；anat/fmap 通过为 yes；rest/task 通过需长度匹配且FD≤阈值；dwi 通过需FD≤阈值）")
     parser.add_argument(
         "--input",
-        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\EFI\\QC_folder\\EFI_QC_merged.csv",
-        help="输入合并后的 CSV 路径",
+        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\EFI\\QC_folder\\EFI中期.xlsx",
+        help="输入合并后的表格路径（CSV 或 Excel）",
+    )
+    parser.add_argument(
+        "--sheet",
+        default=None,
+        help="Excel 工作表名称或索引（当输入为 .xlsx/.xls 时有效，默认第一个工作表）",
     )
     parser.add_argument(
         "--output",
@@ -209,7 +247,8 @@ def main():
         print(f"输入文件不存在: {args.input}")
         sys.exit(1)
 
-    df = pd.read_csv(args.input)
+    df, ext = read_table(args.input, args.sheet)
+    # df = pd.read_csv(args.input)
 
     expected_lengths = {
         "rest1": args.expected_rest1,

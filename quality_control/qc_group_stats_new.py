@@ -83,11 +83,11 @@ def compute_fd_pass_flags(row, fd_cols, fd_threshold=0.2, dwi_fd_threshold=1.43)
 
 
 def summarize_modality(df, group_name, group_mask, internal_name):
-    fd_present_col = f"{internal_name}_fd_present"
+    # 新规则：总数包含该组内的所有个体；NA/空视为失败。
     pass_col = f"{internal_name}_pass"
-    considered = df.loc[group_mask & (df[fd_present_col] == True)]
-    total = int(considered.shape[0])
-    passes = int(considered[pass_col].sum())
+    group_size = int(df.loc[group_mask].shape[0])
+    passes = int(df.loc[group_mask, pass_col].sum())
+    total = group_size
     fails = total - passes
     return {
         "group": group_name,
@@ -125,10 +125,10 @@ def build_group_table(out_df, groups_order, modality_pairs):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="基于新表格（CSV/XLSX，FD 列）按组统计任务与 DWI 的通过/失败/合计/通过率；总数仅统计有 FD 的个体，失败为有 FD 但未通过")
+    parser = argparse.ArgumentParser(description="基于新表格（CSV/XLSX，FD 列）按组统计任务与 DWI 的通过/失败/合计/通过率；总数包含所有个体，NA/空视为失败")
     parser.add_argument(
         "--input",
-        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\XY\\xy_fd.xlsx",
+        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\THU\\CIBR中期.xlsx",
         help="输入 CSV/XLSX 路径（包含列：Group, dwi, T1w, T2w, nback, rest_1, rest_2, rest_3, rest_4, sst, switch）",
     )
     parser.add_argument(
@@ -138,12 +138,12 @@ def main():
     )
     parser.add_argument(
         "--output",
-        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\QC_all\\XY_QC_group_stats_new_long.csv",
+        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\QC_all\\THU_QC_group_stats_new_long.csv",
         help="输出长表统计 CSV（group+modality 行）",
     )
     parser.add_argument(
         "--output_group_table",
-        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\EFI\\QC_all\\XY_QC_group_stats_new_group_table.csv",
+        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\QC_all\\THU_QC_new.csv",
         help="输出分组透视表 CSV（每组：通过/失败/合计/通过率；列为各任务）",
     )
     parser.add_argument(
@@ -176,7 +176,7 @@ def main():
         out_dir_csv = os.path.dirname(args.save_csv)
         if out_dir_csv and not os.path.exists(out_dir_csv):
             os.makedirs(out_dir_csv, exist_ok=True)
-        df.to_csv(args.save_csv, index=False)
+        df.to_csv(args.save_csv, index=False, encoding="utf-8-sig")
 
     # 任务模态列映射：内部名 → CSV 列名（仅统计这些）
     fd_cols = {
@@ -192,7 +192,7 @@ def main():
     # 校验列是否存在，缺失则补空列并告警
     for csv_col in fd_cols.values():
         if csv_col not in df.columns:
-            print(f"警告：输入表缺少列 {csv_col}，该模态的总数将为 0。")
+            print(f"警告：输入表缺少列 {csv_col}，该模态将按组总数计入总数，且全部记为失败。")
             df[csv_col] = pd.NA
 
     # 计算每行的 FD 存在与通过标记
@@ -230,7 +230,7 @@ def main():
     out_dir = os.path.dirname(args.output)
     if out_dir and not os.path.exists(out_dir):
         os.makedirs(out_dir, exist_ok=True)
-    out_df.to_csv(args.output, index=False)
+    out_df.to_csv(args.output, index=False, encoding="utf-8-sig")
 
     # 生成分组透视表（列为显示名）
     modality_pairs = [("rest1", "rest_1"), ("rest2", "rest_2"), ("rest3", "rest_3"), ("sst", "sst"), ("switch", "switch"), ("nback", "nback"), ("dwi", "dwi")]
@@ -242,7 +242,7 @@ def main():
     group_table.to_csv(args.output_group_table, index=False, encoding="utf-8-sig")
 
     # 控制台打印分组块
-    print("分组透视表（总数仅统计有 FD 的个体；失败为有 FD 但未通过；含 DWI）：")
+    print("分组透视表（总数包含所有个体；NA/空视为失败；含 DWI）：")
     for grp in groups + ["ALL"]:
         print(f"\n{grp}")
         for metric in ["通过", "失败", "合计", "通过率"]:
