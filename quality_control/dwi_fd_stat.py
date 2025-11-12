@@ -60,12 +60,12 @@ def main():
     parser = argparse.ArgumentParser(description='Compute head-motion (mean FD) report from QSIPrep confounds.')
     parser.add_argument(
         '--subjects-glob',
-        default='/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/EFI_data/results/qsiprep/sub-*/qsiprep/sub-*',
+        default='/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/results/qsiprep/sub-*/qsiprep/sub-*',
         help='Glob pattern for subject directories (default matches your MATLAB 代码)'
     )
     parser.add_argument(
         '--out-dir',
-        default='/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/EFI/QC_folder',
+        default='/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/QC_folder',
         help='输出 CSV 的目录'
     )
     parser.add_argument(

@@ -135,7 +135,7 @@ def f_headmotion_Jenkinson(fMRIprep_subjDir, taskID, runID, threshold_meanfd, th
     })
 
     # Save the file
-    output_floder = '/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/EFI/QC_folder'
+    output_floder = '/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/QC_folder'
     os.makedirs(output_floder, exist_ok=True)  # 确保目录存在
     output_file = os.path.join(output_floder, f'Tsinghua_BOLDheadmotion_{taskID}_{runID}_summary.csv')
 
@@ -172,7 +172,7 @@ def main():
     args = parser.parse_args()
 
     # ✅ 修改：只处理 rest 任务，路径指向 rest 数据
-    rest_path_pattern = '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/EFI_data/results/fmriprep_rest/sub-*/fmriprep/sub-*'
+    rest_path_pattern = '/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/results/fmriprep_rest/sub-*/fmriprep/sub-*'
 
     subject_dirs = find_subject_dirs(rest_path_pattern)
 

@@ -2,8 +2,8 @@
 #SBATCH -J sst
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --ntasks-per-node=8
-#SBATCH -p q_fat
+#SBATCH --ntasks-per-node=12
+#SBATCH -p q_fat_c
 
 
 module load singularity/3.7.0
