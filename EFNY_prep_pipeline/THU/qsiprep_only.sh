@@ -3,9 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --ntasks-per-node=8
-#SBATCH --mem-per-cpu 20gb
-#SBATCH -p q_fat_c
-#SBATCH -q high_c
+#SBATCH -p q_fat
 
 #this script is only for preprocess
 
@@ -13,11 +11,11 @@ module load singularity/3.7.0
 module load freesurfer
 
 #User inputs:
-bids_root_dir=/ibmgpfs/cuizaixu_lab/tanlirou1/Tsinghua/BIDS
-bids_root_dir_output=/home/cuizaixu_lab/xuhaoshu/DATA_C/brainproject_prep_proc/QC_folder/results
-bids_root_dir_output_wd4singularity=/home/cuizaixu_lab/xuhaoshu/DATA_C/brainproject_prep_proc/QC_folder/wd
-freesurfer_dir=/ibmgpfs/cuizaixu_lab/tanlirou1/Tsinghua/freesurfer
-templateflow=/home/cuizaixu_lab/xuhaoshu/DATA_C/packages/templateflow
+bids_root_dir=/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/BIDS
+bids_root_dir_output=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/results
+bids_root_dir_output_wd4singularity=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/wd/qsiprep
+freesurfer_dir=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/freesurfer
+templateflow=/ibmgpfs/cuizaixu_lab/xuhaoshu/packages/templateflow
 subj=$1
 nthreads=8
 
@@ -27,12 +25,12 @@ echo "Running qsiprep on participant: ${subj}"
 echo ""
 
 SUBJECTS_DIR=$freesurfer_dir
-#Make freesurfer directory and participant directory in derivatives folder
-if [ ! -d $freesurfer_dir/${subj} ]; then
-    mkdir $freesurfer_dir/${subj}
-    mkdir $freesurfer_dir/${subj}/mri
-    mkdir $freesurfer_dir/${subj}/mri/orig
-fi
+# #Make freesurfer directory and participant directory in derivatives folder
+# if [ ! -d $freesurfer_dir/${subj} ]; then
+#     mkdir $freesurfer_dir/${subj}
+#     mkdir $freesurfer_dir/${subj}/mri
+#     mkdir $freesurfer_dir/${subj}/mri/orig
+# fi
 
 # freesurfer
 #mri_convert $bids_root_dir/${subj}/anat/${subj}_T1w.nii $freesurfer_dir/${subj}/mri/orig/001.mgz
@@ -70,8 +68,8 @@ unset PYTHONPATH; singularity run --cleanenv --bind $bids_root_dir \
     -B $bids_root_dir_output/qsiprep:/recon_input \
     -B $freesurfer_dir:/freesurfer \
     -B $templateflow:/ibmgpfs/cuizaixu_lab/xuhaoshu/packages/templateflow \
-    -B /ibmgpfs/cuizaixu_lab/xuhaoshu/scripts/freesurfer_license:/freesurfer_license \
-    /ibmgpfs/cuizaixu_lab/xuhaoshu/packages/qsiprep.sif \
+    -B /ibmgpfs/cuizaixu_lab/xuhaoshu/packages/freesurfer_license:/freesurfer_license \
+    /ibmgpfs/cuizaixu_lab/xuhaoshu/packages/singularity/qsiprep.sif \
     /inputbids /output \
     participant \
     --participant_label ${subj} \

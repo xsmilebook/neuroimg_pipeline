@@ -14,7 +14,8 @@ wd=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/wd/nb
 output=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/results
 fs_license=/ibmgpfs/cuizaixu_lab/xuhaoshu/packages/freesurfer_license
 templateflow=/ibmgpfs/cuizaixu_lab/xuhaoshu/packages/templateflow
-fs_dir=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/freesurfer
+# fs_dir=/ibmgpfs/cuizaixu_lab/xuhaoshu/code/neuroimg_pipeline/datasets/EFNY/THU/freesurfer
+fs_dir=/ibmgpfs/cuizaixu_lab/liyang/BrainProject25/Tsinghua_data/freesurfer
 subj=$1
 nthreads=40
 #Run fmriprep
