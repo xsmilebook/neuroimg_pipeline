@@ -128,7 +128,7 @@ def main():
     parser = argparse.ArgumentParser(description="基于新表格（CSV/XLSX，FD 列）按组统计任务与 DWI 的通过/失败/合计/通过率；总数包含所有个体，NA/空视为失败")
     parser.add_argument(
         "--input",
-        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\THU\\CIBR中期.xlsx",
+        default=r"e:\\projects\\neuroimg_pipeline\\datasets\\EFNY\\THU\\THU_QC_merged.csv",
         help="输入 CSV/XLSX 路径（包含列：Group, dwi, T1w, T2w, nback, rest_1, rest_2, rest_3, rest_4, sst, switch）",
     )
     parser.add_argument(

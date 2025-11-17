@@ -44,11 +44,11 @@ def _prepare_subject_table(df: pd.DataFrame, keep_cols: list[str], rename_map: d
 
 
 def merge_qc_tables(qc_dir: Path, output_path: Path) -> Path:
-    # 基表：checkup
-    base_path = qc_dir / 'checkup_BIDS_EFI.csv'
+    # 基表：bids_summary
+    base_path = qc_dir / 'bids_summary_1106.csv'
     base_df = _read_csv(base_path)
     if 'subj_ID' not in base_df.columns:
-        raise ValueError('checkup_BIDS_EFI.csv 缺少 subj_ID 列')
+        raise ValueError('bids_summary_1106.csv 缺少 subj_ID 列')
     # 统一 key 名，避免 merge 时混淆
     base_df = base_df.copy()
     base_df['subj_ID'] = base_df['subj_ID'].astype(str)
@@ -148,13 +148,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         '--qc_dir',
         type=Path,
-        default=Path(r'e:\projects\neuroimg_pipeline\datasets\EFNY\EFI\QC_folder'),
+        default=Path(r'e:\projects\neuroimg_pipeline\datasets\EFNY\THU\QC_folder'),
         help='QC_folder 目录路径'
     )
     parser.add_argument(
         '--output',
         type=Path,
-        default=Path(r'e:\projects\neuroimg_pipeline\datasets\EFNY\EFI\QC_folder\EFI_QC_merged.csv'),
+        default=Path(r'e:\projects\neuroimg_pipeline\datasets\EFNY\THU\QC_folder\THU_QC_merged.csv'),
         help='合并后的输出 CSV 路径'
     )
     return parser.parse_args()

@@ -382,10 +382,16 @@ def bids_to_hcp_example(input_bids_dir, output_hcp_dir):
             if modality == 'epi':
                 dest_dir = os.path.join(subj_out_dir, 'func', 'unprocessed', 'field_maps')
                 os.makedirs(dest_dir, exist_ok=True)
-                # Only rely on filename-based direction; no JSON reading.
                 dir_tag = (direction or get_phase_encoding_info(file)).upper()
                 if dir_tag not in ['AP', 'PA']:
                     print(f"Warning: Field map direction not AP/PA in {file}; skipping.")
+                    continue
+                task_tag = (bids_info.get('task') or '').lower()
+                acq_tag = (bids_info.get('acq') or '').lower()
+                fname = file.lower()
+                is_rest = (task_tag == 'rest') or ('_task-rest' in fname) or ('rest' in fname)
+                is_dwi = (acq_tag == 'dwi') or ('_acq-dwi' in fname)
+                if not (is_rest and not is_dwi):
                     continue
                 base = f"{dir_tag}_S{ses_num}_R{run}"
                 if ext == '.json':
